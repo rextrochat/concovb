@@ -1,61 +1,128 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <title>Server Bilgilendirme</title>
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<title>Server Bilgilendirme</title>
+
+<style>
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    background-size: 400% 400%;
+    animation: bgMove 10s ease infinite;
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.container {
+    margin-top: 80px;
+    animation: fadeIn 1.5s ease;
+}
+
+.baslik {
+    font-size: 42px;
+    margin-bottom: 20px;
+    animation: slideDown 1.5s ease;
+}
+
+.aciklama {
+    font-size: 18px;
+    margin-bottom: 30px;
+    animation: fadeIn 2s ease;
+}
+
+.buton {
+    text-decoration: none;
+    color: white;
+    background: #00aaff;
+    padding: 12px 25px;
+    border-radius: 8px;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.buton:hover {
+    background: #0088cc;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #00aaff;
+}
+
+.kart {
+    background: rgba(0,0,0,0.4);
+    width: 60%;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 12px;
+    transition: 0.4s;
+    animation: slideUp 1.5s ease;
+}
+
+.kart:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255,255,255,0.3);
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-60px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(60px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+</style>
+
 </head>
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1 class="baslik anim">Server Bilgilendirme Sitesi</h1>
+    <h1 class="baslik">Server Bilgilendirme Sitesi</h1>
 
-        <p class="aciklama anim">
-            Bu bir bilgilendirme sitesidir. Server paketlerine aşağıdaki linkten ulaşabilirsiniz.
+    <p class="aciklama">
+        Bu bir bilgilendirme sitesidir. Server paketlerine aşağıdaki linkten ulaşabilirsiniz.
+    </p>
+
+    <a href="https://client.crafthosting.com.tr/market" target="_blank" class="buton">
+        Paketlere Git
+    </a>
+
+    <div class="kart">
+        <h2>Hızlı ve Güvenli</h2>
+        <p>
+            Serverlerimiz her zaman hızlı ve güvenlidir.
+            Tamamen DDOS koruması bulunmaktadır.
         </p>
-
-        <a href="https://client.crafthosting.com.tr/market" target="_blank" class="buton">
-            Paketlere Git
-        </a>
-
-        <div class="kart anim">
-            <h2>Hızlı ve Güvenli</h2>
-            <p>
-                Serverlerimiz her zaman hızlı ve güvenlidir.
-                Tamamen DDOS koruması bulunmaktadır.
-            </p>
-        </div>
-
-        <div class="kart anim">
-            <h2>DDOS Koruması</h2>
-            <p>
-                Güvenlik için Mikrotik ve Royale sistemleri kullanılmaktadır.
-                Bu sayede tamamen güvenli bir altyapı sağlanır.
-            </p>
-        </div>
-
     </div>
 
-    <script>
-        // Scroll animasyonu
-        const animler = document.querySelectorAll(".anim");
+    <div class="kart">
+        <h2>DDOS Koruması</h2>
+        <p>
+            Güvenlik için Mikrotik ve Royale sistemleri kullanılmaktadır.
+            Bu sayede tamamen güvenli bir altyapı sağlanır.
+        </p>
+    </div>
 
-        function kontrolEt() {
-            const tetik = window.innerHeight - 50;
-
-            animler.forEach(el => {
-                const ust = el.getBoundingClientRect().top;
-
-                if (ust < tetik) {
-                    el.classList.add("goster");
-                }
-            });
-        }
-
-        window.addEventListener("scroll", kontrolEt);
-        window.addEventListener("load", kontrolEt);
-    </script>
+</div>
 
 </body>
 </html>
