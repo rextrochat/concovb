@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Film & Dizi Önerileri</title>
+<title>Film Önerisi</title>
 
 <style>
 body{
@@ -11,10 +11,24 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     background:#0d1117;
     color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
+}
+
+/* Başlık */
+.title{
+    text-align:center;
+    margin-top:40px;
+    font-size:40px;
+    font-weight:bold;
+    background: linear-gradient(90deg,#58a6ff,#ff7b72,#58a6ff);
+    background-size:200%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation: shine 4s linear infinite;
+}
+
+@keyframes shine{
+    0%{background-position:0%}
+    100%{background-position:200%}
 }
 
 .container{
@@ -22,6 +36,7 @@ body{
     grid-template-columns:repeat(4,1fr);
     gap:20px;
     width:90%;
+    margin:50px auto;
 }
 
 .card{
@@ -29,7 +44,6 @@ body{
     border-radius:12px;
     overflow:hidden;
     transition:0.3s;
-    position:relative;
 }
 
 .card:hover{
@@ -51,32 +65,19 @@ input{
 
 .content{
     max-height:0;
-    overflow:hidden;
-    transition:max-height 0.5s ease, padding 0.5s ease;
+    overflow:auto;
+    transition:max-height 0.6s ease, padding 0.6s ease;
     background:#0d1117;
 }
 
 input:checked ~ .content{
-    max-height:200px;
+    max-height:500px;
     padding:15px;
 }
 
 .content p{
-    margin:8px 0;
-    opacity:0;
-    transform:translateY(-10px);
-    animation:fade 0.5s forwards;
-}
-
-input:checked ~ .content p{
-    animation:fade 0.5s forwards;
-}
-
-@keyframes fade{
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    margin:6px 0;
+    font-size:14px;
 }
 
 @media(max-width:900px){
@@ -95,47 +96,121 @@ input:checked ~ .content p{
 
 <body>
 
+<div class="title">🎬 Film Önerisi</div>
+
 <div class="container">
 
-    <div class="card">
-        <input type="checkbox" id="aksiyon">
-        <label for="aksiyon">💥 Aksiyon</label>
-        <div class="content">
-            <p>Mad Max: Fury Road</p>
-            <p>John Wick</p>
-            <p>The Dark Knight</p>
-        </div>
-    </div>
+<!-- AKSİYON -->
+<div class="card">
+<input type="checkbox" id="aksiyon">
+<label for="aksiyon">💥 Aksiyon</label>
+<div class="content">
+<p>Mad Max: Fury Road</p>
+<p>John Wick</p>
+<p>The Dark Knight</p>
+<p>Gladiator</p>
+<p>Avengers: Endgame</p>
+<p>Inception</p>
+<p>Die Hard</p>
+<p>The Matrix</p>
+<p>Top Gun: Maverick</p>
+<p>Mission Impossible</p>
+<p>Black Panther</p>
+<p>Captain America</p>
+<p>Fast & Furious</p>
+<p>Extraction</p>
+<p>Tenet</p>
+<p>300</p>
+<p>The Equalizer</p>
+<p>Edge of Tomorrow</p>
+<p>Casino Royale</p>
+<p>Transformers</p>
+</div>
+</div>
 
-    <div class="card">
-        <input type="checkbox" id="macera">
-        <label for="macera">🗺️ Macera</label>
-        <div class="content">
-            <p>Interstellar</p>
-            <p>The Lord of the Rings</p>
-            <p>Pirates of the Caribbean</p>
-        </div>
-    </div>
+<!-- MACERA -->
+<div class="card">
+<input type="checkbox" id="macera">
+<label for="macera">🗺️ Macera</label>
+<div class="content">
+<p>Interstellar</p>
+<p>The Lord of the Rings</p>
+<p>Pirates of the Caribbean</p>
+<p>Jurassic Park</p>
+<p>Indiana Jones</p>
+<p>The Hobbit</p>
+<p>Avatar</p>
+<p>Life of Pi</p>
+<p>The Revenant</p>
+<p>Jumanji</p>
+<p>King Kong</p>
+<p>The Maze Runner</p>
+<p>Harry Potter</p>
+<p>Star Wars</p>
+<p>Uncharted</p>
+<p>Treasure Planet</p>
+<p>The Mummy</p>
+<p>Journey 2</p>
+<p>Doctor Strange</p>
+<p>Chronicles of Narnia</p>
+</div>
+</div>
 
-    <div class="card">
-        <input type="checkbox" id="korku">
-        <label for="korku">👻 Korku</label>
-        <div class="content">
-            <p>The Conjuring</p>
-            <p>Insidious</p>
-            <p>Hereditary</p>
-        </div>
-    </div>
+<!-- KORKU -->
+<div class="card">
+<input type="checkbox" id="korku">
+<label for="korku">👻 Korku</label>
+<div class="content">
+<p>The Conjuring</p>
+<p>Insidious</p>
+<p>Hereditary</p>
+<p>The Nun</p>
+<p>It</p>
+<p>Sinister</p>
+<p>Annabelle</p>
+<p>The Exorcist</p>
+<p>A Quiet Place</p>
+<p>The Ring</p>
+<p>Scream</p>
+<p>Paranormal Activity</p>
+<p>The Grudge</p>
+<p>Us</p>
+<p>Get Out</p>
+<p>The Shining</p>
+<p>Lights Out</p>
+<p>Smile</p>
+<p>Bird Box</p>
+<p>The Babadook</p>
+</div>
+</div>
 
-    <div class="card">
-        <input type="checkbox" id="komedi">
-        <label for="komedi">😂 Komedi</label>
-        <div class="content">
-            <p>The Hangover</p>
-            <p>Superbad</p>
-            <p>Deadpool</p>
-        </div>
-    </div>
+<!-- KOMEDİ -->
+<div class="card">
+<input type="checkbox" id="komedi">
+<label for="komedi">😂 Komedi</label>
+<div class="content">
+<p>The Hangover</p>
+<p>Superbad</p>
+<p>Deadpool</p>
+<p>Home Alone</p>
+<p>Mr. Bean</p>
+<p>Yes Man</p>
+<p>The Mask</p>
+<p>Rush Hour</p>
+<p>Central Intelligence</p>
+<p>Step Brothers</p>
+<p>Grown Ups</p>
+<p>Dumb and Dumber</p>
+<p>We're the Millers</p>
+<p>Scary Movie</p>
+<p>21 Jump Street</p>
+<p>Johnny English</p>
+<p>Bruce Almighty</p>
+<p>White Chicks</p>
+<p>Paul</p>
+<p>Free Guy</p>
+</div>
+</div>
 
 </div>
 
