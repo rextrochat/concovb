@@ -6,12 +6,12 @@
 <title>Craft Hosting Bilgilendirme</title>
 <style>
 :root {
-  --bg-dark: #2a003f;
+  --bg-dark: #001f3f;
   --bg-light: #ffffff;
   --text-dark: #ffffff;
-  --text-light: #000000;
-  --primary: #ff6fff;
-  --accent: #d47fff;
+  --text-light: #001f3f;
+  --primary: #3399ff;
+  --accent: #66ccff;
 }
 body {
   margin:0;
@@ -27,7 +27,7 @@ header{
   background: linear-gradient(90deg,var(--primary),var(--accent));
   position:relative;
   overflow:hidden;
-  box-shadow: 0 0 50px rgba(255,111,255,0.6);
+  box-shadow: 0 0 50px rgba(51,153,255,0.6);
 }
 header h1{
   font-size:3rem;
@@ -35,22 +35,22 @@ header h1{
   animation:fadeInDown 1s ease forwards;
   position:relative;
   color:#fff;
-  text-shadow: 0 0 20px #ff6fff, 0 0 30px #d47fff;
+  text-shadow: 0 0 20px #3399ff, 0 0 30px #66ccff;
 }
 header h1::after{
   content:"";
   position:absolute;
   width:100%;
   height:4px;
-  background:linear-gradient(90deg,rgba(255,111,255,0.8),rgba(212,127,255,0));
+  background:linear-gradient(90deg,rgba(51,153,255,0.8),rgba(102,204,255,0));
   top:0; left:0;
   animation: slideLight 2s linear infinite;
 }
 header p{
   font-size:1.3rem;
-  color: #ffc0ff;
+  color: #99ccff;
   animation:fadeInUp 1s ease 0.3s forwards;
-  text-shadow: 0 0 10px #ff6fff;
+  text-shadow: 0 0 10px #3399ff;
 }
 main{
   max-width:1000px;
@@ -62,13 +62,13 @@ section{
   padding:25px;
   background: rgba(255,255,255,0.05);
   border-radius:12px;
-  box-shadow:0 4px 20px rgba(255,111,255,0.3);
+  box-shadow:0 4px 20px rgba(51,153,255,0.3);
   transition:transform 0.4s,box-shadow 0.4s,background 0.4s;
   perspective:1200px;
 }
 section:hover{
   transform: rotateY(6deg) translateY(-12px) scale(1.03);
-  box-shadow:0 15px 40px rgba(255,111,255,0.7);
+  box-shadow:0 15px 40px rgba(51,153,255,0.7);
   background: rgba(255,255,255,0.15);
 }
 h2{
@@ -77,7 +77,7 @@ h2{
   gap:10px;
   margin-top:0;
   transition: color 0.3s;
-  color:#ffc0ff;
+  color:#99ccff;
 }
 h2 .icon{
   display:inline-block;
@@ -104,7 +104,7 @@ button{
   overflow:hidden;
   position:relative;
   transition:transform 0.2s, box-shadow 0.2s;
-  box-shadow:0 0 20px rgba(255,111,255,0.6);
+  box-shadow:0 0 20px rgba(51,153,255,0.6);
 }
 button::before{
   content:"🚀";
@@ -112,30 +112,30 @@ button::before{
 }
 button:hover{
   transform: scale(1.1);
-  box-shadow:0 0 30px rgba(255,111,255,0.9);
+  box-shadow:0 0 30px rgba(51,153,255,0.9);
 }
 button:active::after{
   animation:ripple 0.6s linear;
 }
 button::after{
-  content:'';
-  position:absolute;
-  width:20px;
-  height:20px;
-  background: rgba(255,255,255,0.3);
-  display:block;
-  border-radius:50%;
-  transform: scale(0);
-  pointer-events:none;
-  left:50%;
-  top:50%;
+  content:''; 
+  position:absolute; 
+  width:20px; 
+  height:20px; 
+  background: rgba(255,255,255,0.3); 
+  display:block; 
+  border-radius:50%; 
+  transform: scale(0); 
+  pointer-events:none; 
+  left:50%; 
+  top:50%; 
   transform: translate(-50%,-50%) scale(0);
 }
 footer{
   text-align:center;
   padding:20px;
-  border-top:1px solid rgba(255,111,255,0.3);
-  color:#ffc0ff;
+  border-top:1px solid rgba(51,153,255,0.3);
+  color:#99ccff;
 }
 .social-icons a{
   margin:0 10px;
@@ -172,7 +172,7 @@ footer{
   position:fixed;
   bottom:0;
   width:100%;
-  background: rgba(255,111,255,0.85);
+  background: rgba(51,153,255,0.85);
   color:#fff;
   overflow:hidden;
   white-space:nowrap;
@@ -184,14 +184,14 @@ footer{
   padding-right:50px;
   animation: tickerAnim 20s linear infinite;
 }
-@keyframes fadeInDown{0%{opacity:0;transform:translateY(-30px);}100%{opacity:1;transform:translateY(0);}}
-@keyframes fadeInUp{0%{opacity:0;transform:translateY(30px);}100%{opacity:1;transform:translateY(0);}}
-@keyframes bounce{0%,20%,50%,80%,100%{transform:translateY(0);}40%{transform:translateY(-10px);}60%{transform:translateY(-5px);}}
-@keyframes ripple{0%{transform:translate(-50%,-50%) scale(0);opacity:0.6;}50%{transform:translate(-50%,-50%) scale(3);opacity:0.3;}100%{transform:translate(-50%,-50%) scale(0);opacity:0;}}
-@keyframes slideLight{0%{left:-100%;}100%{left:100%;}}
-@keyframes tickerAnim{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
-@keyframes glowParticle{0%,100%{opacity:0.5;transform:scale(1);}50%{opacity:1;transform:scale(1.8);}}
-@keyframes meteorFall{0%{transform:translateY(-50px) translateX(0) rotate(0deg);}100%{transform:translateY(600px) translateX(300px) rotate(720deg);}}
+@keyframes fadeInDown{0%{opacity:0;transform:translateY(-30px);}100%{opacity:1;transform:translateY(0);} }
+@keyframes fadeInUp{0%{opacity:0;transform:translateY(30px);}100%{opacity:1;transform:translateY(0);} }
+@keyframes bounce{0%,20%,50%,80%,100%{transform:translateY(0);}40%{transform:translateY(-10px);}60%{transform:translateY(-5px);} }
+@keyframes ripple{0%{transform:translate(-50%,-50%) scale(0);opacity:0.6;}50%{transform:translate(-50%,-50%) scale(3);opacity:0.3;}100%{transform:translate(-50%,-50%) scale(0);opacity:0;} }
+@keyframes slideLight{0%{left:-100%;}100%{left:100%;} }
+@keyframes tickerAnim{0%{transform:translateX(100%);}100%{transform:translateX(-100%);} }
+@keyframes glowParticle{0%,100%{opacity:0.5;transform:scale(1);}50%{opacity:1;transform:scale(1.8);} }
+@keyframes meteorFall{0%{transform:translateY(-50px) translateX(0) rotate(0deg);}100%{transform:translateY(600px) translateX(300px) rotate(720deg);} }
 </style>
 </head>
 <body>
@@ -229,14 +229,14 @@ footer{
 </footer>
 <script>
 const toggle=document.getElementById('darkModeToggle');
-toggle.addEventListener('click',()=>{
+toggle.addEventListener('click',()=>{ 
   if(document.body.style.background==='var(--bg-light)'){
-    document.body.style.background='var(--bg-dark)';
-    document.body.style.color='var(--text-dark)';
+    document.body.style.background='var(--bg-dark)'; 
+    document.body.style.color='var(--text-dark)'; 
   }else{
-    document.body.style.background='var(--bg-light)';
-    document.body.style.color='var(--text-light)';
-  }
+    document.body.style.background='var(--bg-light)'; 
+    document.body.style.color='var(--text-light)'; 
+  } 
 });
 
 const particles=document.getElementById('particles');
@@ -246,20 +246,16 @@ for(let i=0;i<200;i++){
   p.style.position='absolute';
   p.style.width=size+'px';
   p.style.height=size+'px';
-  p.style.background='#ff6fff';
+  p.style.background='#3399ff';
   p.style.borderRadius='50%';
   p.style.top=Math.random()*100+'%';
   p.style.left=Math.random()*100+'%';
   const dur=4000+Math.random()*4000;
   const dir=Math.random()>0.5?1:-1;
-  p.animate([
-    {transform:`translate(0px,0px)`},
-    {transform:`translate(${dir*Math.random()*50}px, ${-200}px)`}
-  ],{duration:dur,iterations:Infinity});
+  p.animate([{transform:`translate(0px,0px)`},{transform:`translate(${dir*Math.random()*50}px, ${-200}px)`}],{duration:dur,iterations:Infinity});
   p.style.animation='glowParticle '+(2+Math.random()*2)+'s infinite alternate';
   particles.appendChild(p);
 }
-
 
 for(let i=0;i<5;i++){
   let m=document.createElement('div');
@@ -267,7 +263,7 @@ for(let i=0;i<5;i++){
   m.style.position='absolute';
   m.style.width=size+'px';
   m.style.height=size*3+'px';
-  m.style.background='linear-gradient(white, #ff6fff)';
+  m.style.background='linear-gradient(white, #3399ff)';
   m.style.top='-50px';
   m.style.left=Math.random()*window.innerWidth+'px';
   m.style.borderRadius='50%';
@@ -278,22 +274,22 @@ for(let i=0;i<5;i++){
 }
 
 const buttons=document.querySelectorAll('button');
-buttons.forEach(btn=>{
-  btn.addEventListener('click',e=>{
-    const circle=document.createElement('span');
-    circle.style.position='absolute';
-    circle.style.width='20px';
-    circle.style.height='20px';
-    circle.style.background='rgba(255,255,255,0.3)';
-    circle.style.borderRadius='50%';
-    circle.style.left=e.offsetX+'px';
-    circle.style.top=e.offsetY+'px';
-    circle.style.transform='scale(0)';
-    circle.style.pointerEvents='none';
-    circle.style.animation='ripple 0.6s linear';
-    btn.appendChild(circle);
-    setTimeout(()=>{circle.remove();},600);
-  });
+buttons.forEach(btn=>{ 
+  btn.addEventListener('click',e=>{ 
+    const circle=document.createElement('span'); 
+    circle.style.position='absolute'; 
+    circle.style.width='20px'; 
+    circle.style.height='20px'; 
+    circle.style.background='rgba(255,255,255,0.3)'; 
+    circle.style.borderRadius='50%'; 
+    circle.style.left=e.offsetX+'px'; 
+    circle.style.top=e.offsetY+'px'; 
+    circle.style.transform='scale(0)'; 
+    circle.style.pointerEvents='none'; 
+    circle.style.animation='ripple 0.6s linear'; 
+    btn.appendChild(circle); 
+    setTimeout(()=>{circle.remove();},600); 
+  }); 
 });
 </script>
 </body>
