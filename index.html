@@ -118,7 +118,7 @@ button:hover {
 
     <h1>IP Bilgi Sorgulama</h1>
 
-    <!-- Giriş Formu -->
+    
     <div id="loginBox">
         <input id="username" placeholder="Kullanıcı Adı"><br>
         <input id="password" type="password" placeholder="Şifre"><br>
@@ -126,7 +126,7 @@ button:hover {
         <p>Hesabınız yok mu? <span class="underline-link" onclick="showRegister()">Kayıt Ol</span></p>
     </div>
 
-    <!-- Kayıt Formu -->
+ 
     <div id="registerBox" style="display:none;">
         <input id="newUser" placeholder="Kullanıcı Adı"><br>
         <input id="newPass" type="password" placeholder="Şifre"><br>
@@ -134,7 +134,7 @@ button:hover {
         <p>Zaten hesabınız var mı? <span class="underline-link" onclick="showLogin()">Giriş Yap</span></p>
     </div>
 
-    <!-- Profil / IP Sorgulama -->
+  
     <div id="profile" style="display:none; margin-top:20px;">
         <h2 id="welcome"></h2>
         <input id="ipInput" placeholder="IP adresi gir"><br>
@@ -153,7 +153,7 @@ button:hover {
 const defaultUser = "121212";
 const defaultPass = "121212";
 
-// Sayfa yüklendiğinde
+
 window.onload = function(){
     if(localStorage.getItem("loggedIn") === "true"){
         showProfile();
@@ -162,7 +162,7 @@ window.onload = function(){
     }
 }
 
-// Animasyonlu mesaj gösterme
+
 function showMessage(text) {
     const msg = document.getElementById("message");
     msg.innerText = text;
@@ -174,7 +174,7 @@ function showMessage(text) {
     },3000);
 }
 
-// Giriş
+
 function login(){
     let user = document.getElementById("username").value;
     let pass = document.getElementById("password").value;
@@ -187,7 +187,7 @@ function login(){
     }
 }
 
-// Kayıt
+
 function register(){
     let user = document.getElementById("newUser").value;
     let pass = document.getElementById("newPass").value;
@@ -199,14 +199,14 @@ function register(){
     }
 }
 
-// Çıkış
+
 function logout(){
     localStorage.setItem("loggedIn","false");
     showLogin();
     showMessage("Çıkış yapıldı.");
 }
 
-// Profili Göster
+
 function showProfile(){
     document.getElementById("loginBox").style.display="none";
     document.getElementById("registerBox").style.display="none";
@@ -229,7 +229,7 @@ function showRegister(){
     document.getElementById("profile").style.display="none";
 }
 
-// IP sorgulama
+
 async function getIP(){
     let response = await fetch("https://ipapi.co/json/");
     let data = await response.json();
