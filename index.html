@@ -4,118 +4,140 @@
 <meta charset="UTF-8">
 <title>IP Analiz XwX</title>
 <style>
-body{
-    background:#0f172a;
-    font-family:Arial, sans-serif;
-    color:white;
-    text-align:center;
-    padding-top:40px;
+body {
     margin:0;
+    padding:0;
+    font-family: Arial, sans-serif;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg, #ffffff, #38bdf8); /* Beyaz-mavi gradient */
+    color:white;
 }
-h1{
-    font-size:38px;
+
+.main-container {
+    text-align:center;
+    max-width:400px;
+    width:90%;
+}
+
+.logo {
+    width:120px;
     margin-bottom:20px;
-    color:#38bdf8;
-}
-.container{
-    width:380px;
-    margin:auto;
-    padding:30px;
-    border-radius:15px;
-    box-shadow:0 0 15px #38bdf8;
-    background:#1e293b;
-    transition: transform 0.2s;
-}
-.container:hover{
-    transform: translateY(-5px);
-}
-input{
-    padding:10px;
-    width:80%;
-    border-radius:8px;
-    border:none;
-    margin:10px 0;
     display:block;
     margin-left:auto;
     margin-right:auto;
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
 }
-button{
-    padding:10px 20px;
-    border:none;
-    background:#38bdf8;
+
+h1 {
+    font-size:36px;
+    color:#f0f9ff;
+    text-shadow: 0 0 8px #0ea5e9, 0 0 12px #38bdf8;
+    margin-bottom:20px;
+}
+
+input {
+    width:80%;
+    padding:10px;
+    margin:10px 0;
     border-radius:8px;
-    cursor:pointer;
-    transition:0.3s;
-}
-button:hover{
-    background:#0ea5e9;
-}
-.info{
-    margin:8px 0;
+    border:none;
+    outline:none;
     font-size:16px;
 }
-#profile, #registerBox{
+
+button {
+    padding:10px 20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    background:#38bdf8;
+    color:white;
+    font-weight:bold;
+    margin-top:10px;
+    transition:0.3s;
+}
+
+button:hover {
+    background:#0ea5e9;
+}
+
+.underline-link {
+    text-decoration:underline;
+    cursor:pointer;
+    color:#ffffff;
+    font-weight:bold;
+}
+
+#logoutBtn {
+    position:fixed;
+    left:20px;
+    top:20px;
+    background:#f87171;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
     display:none;
 }
-#logoutBtn{
-    margin-top:12px;
-    background:#f87171;
+
+.info {
+    margin:8px 0;
+    font-size:16px;
+    color:#f0f9ff;
+    text-shadow: 0 0 5px #0ea5e9;
 }
-footer{
+
+#message {
     position:fixed;
-    bottom:5px;
-    width:100%;
-    text-align:center;
-    font-size:14px;
-    color:#94a3b8;
-    opacity:0.1;
-    transition: opacity 0.3s;
-}
-footer:hover{
-    opacity:1;
-}
-.logo{
-    width:100px;
-    height:auto;
-    margin-bottom:15px;
-}
-.underline-link{
-    text-decoration: underline;
-    cursor:pointer;
-    color:#38bdf8;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#38bdf8;
+    color:white;
+    padding:10px 20px;
+    border-radius:8px;
+    opacity:0;
+    transition: all 0.5s ease;
+    font-weight:bold;
+    text-shadow: 0 0 5px #ffffff;
 }
 </style>
 </head>
 <body>
 
-<img src="logo.png" alt="Logo" class="logo">
+<div id="message">Mesaj buraya gelecek</div>
+<button id="logoutBtn" onclick="logout()">Çıkış Yap</button>
 
-<h1>IP Bilgi Sorgulama</h1>
+<div class="main-container">
 
+    <img src="https://www.vox.com/the-goods/2019/1/7/18172577/mastercard-logo-change-no-words" alt="Logo" class="logo">
 
-<div id="loginBox" class="container">
-    <h2>Giriş Yap</h2>
-    <input id="username" placeholder="Kullanıcı Adı"><br>
-    <input id="password" type="password" placeholder="Şifre"><br>
-    <button onclick="login()">Giriş</button>
-    <p>Hesabınız yok mu? <span class="underline-link" onclick="showRegister()">Kayıt Ol</span></p>
-</div>
+    <h1>IP Bilgi Sorgulama</h1>
 
+    <!-- Giriş Formu -->
+    <div id="loginBox">
+        <input id="username" placeholder="Kullanıcı Adı"><br>
+        <input id="password" type="password" placeholder="Şifre"><br>
+        <button onclick="login()">Giriş Yap</button>
+        <p>Hesabınız yok mu? <span class="underline-link" onclick="showRegister()">Kayıt Ol</span></p>
+    </div>
 
-<div id="registerBox" class="container">
-    <h2>Kayıt Ol</h2>
-    <input id="newUser" placeholder="Kullanıcı Adı"><br>
-    <input id="newPass" type="password" placeholder="Şifre"><br>
-    <button onclick="register()">Kayıt Ol</button>
-    <p>Zaten hesabınız var mı? <span class="underline-link" onclick="showLogin()">Giriş Yap</span></p>
-</div>
+    <!-- Kayıt Formu -->
+    <div id="registerBox" style="display:none;">
+        <input id="newUser" placeholder="Kullanıcı Adı"><br>
+        <input id="newPass" type="password" placeholder="Şifre"><br>
+        <button onclick="register()">Kayıt Ol</button>
+        <p>Zaten hesabınız var mı? <span class="underline-link" onclick="showLogin()">Giriş Yap</span></p>
+    </div>
 
-
-<div id="profile" class="container">
-    <h2 id="welcome"></h2>
-    <button id="logoutBtn" onclick="logout()">Çıkış Yap</button>
-    <div style="margin-top:15px;">
-        <input id="ipInput" placeholder="IP adresi gir">
+    <!-- Profil / IP Sorgulama -->
+    <div id="profile" style="display:none; margin-top:20px;">
+        <h2 id="welcome"></h2>
+        <input id="ipInput" placeholder="IP adresi gir"><br>
         <button onclick="searchIP()">Ara</button>
         <div class="info">IP: <span id="ip">-</span></div>
         <div class="info">Ülke: <span id="country">-</span></div>
@@ -124,15 +146,14 @@ footer:hover{
         <div class="info">Koordinat: <span id="coord">-</span></div>
         <div class="info">İnternet Sağlayıcısı: <span id="isp">-</span></div>
     </div>
-</div>
 
-<footer>İletişim için: örnek@mail.com | 2026 haklarına sahiptir</footer>
+</div>
 
 <script>
 const defaultUser = "121212";
 const defaultPass = "121212";
 
-
+// Sayfa yüklendiğinde
 window.onload = function(){
     if(localStorage.getItem("loggedIn") === "true"){
         showProfile();
@@ -141,61 +162,74 @@ window.onload = function(){
     }
 }
 
+// Animasyonlu mesaj gösterme
+function showMessage(text) {
+    const msg = document.getElementById("message");
+    msg.innerText = text;
+    msg.style.opacity = "1";
+    msg.style.top = "20px";
+    setTimeout(()=>{
+        msg.style.opacity="0";
+        msg.style.top="0px";
+    },3000);
+}
 
+// Giriş
 function login(){
     let user = document.getElementById("username").value;
     let pass = document.getElementById("password").value;
     if(user === defaultUser && pass === defaultPass){
         localStorage.setItem("loggedIn","true");
         showProfile();
+        showMessage("Giriş başarılı!");
     } else{
-        alert("Kullanıcı adı veya şifre hatalı!");
+        showMessage("Kullanıcı adı veya şifre hatalı!");
     }
 }
 
-
+// Kayıt
 function register(){
     let user = document.getElementById("newUser").value;
     let pass = document.getElementById("newPass").value;
     if(user && pass){
-        alert("Kayıt başarılı! Artık giriş yapabilirsiniz.");
+        showMessage("Kayıt başarılı! Giriş yapabilirsiniz.");
         showLogin();
     } else{
-        alert("Lütfen kullanıcı adı ve şifre girin.");
+        showMessage("Lütfen kullanıcı adı ve şifre girin.");
     }
 }
 
-
+// Çıkış
 function logout(){
     localStorage.setItem("loggedIn","false");
-    document.getElementById("profile").style.display="none";
     showLogin();
+    showMessage("Çıkış yapıldı.");
 }
 
-
+// Profili Göster
 function showProfile(){
     document.getElementById("loginBox").style.display="none";
     document.getElementById("registerBox").style.display="none";
     document.getElementById("profile").style.display="block";
+    document.getElementById("logoutBtn").style.display="block";
     document.getElementById("welcome").innerText = "Hoşgeldin " + defaultUser;
     getIP();
 }
 
-// Giriş Formunu Göster
+// Giriş / Kayıt Görünümü
 function showLogin(){
     document.getElementById("loginBox").style.display="block";
     document.getElementById("registerBox").style.display="none";
     document.getElementById("profile").style.display="none";
+    document.getElementById("logoutBtn").style.display="none";
 }
-
-
 function showRegister(){
     document.getElementById("loginBox").style.display="none";
     document.getElementById("registerBox").style.display="block";
     document.getElementById("profile").style.display="none";
 }
 
-
+// IP sorgulama
 async function getIP(){
     let response = await fetch("https://ipapi.co/json/");
     let data = await response.json();
@@ -219,6 +253,5 @@ function showData(data){
     document.getElementById("isp").innerText=data.org;
 }
 </script>
-
 </body>
 </html>
