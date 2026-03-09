@@ -17,8 +17,6 @@ justify-content:center;
 align-items:center;
 }
 
-
-
 .panel{
 width:550px;
 background:rgba(255,255,255,0.08);
@@ -28,11 +26,13 @@ backdrop-filter:blur(10px);
 text-align:center;
 }
 
-
-
 h1{
 color:#93c5fd;
 text-shadow:0 0 15px #60a5fa;
+}
+
+.tabs button{
+width:120px;
 }
 
 input{
@@ -77,30 +77,64 @@ color:#bfdbfe;
 margin-bottom:10px;
 }
 
+.message{
+position:fixed;
+top:-80px;
+left:50%;
+transform:translateX(-50%);
+background:#2563eb;
+padding:15px 30px;
+border-radius:10px;
+font-weight:bold;
+transition:0.6s;
+box-shadow:0 0 20px rgba(0,0,0,0.3);
+}
+
+.message.show{
+top:20px;
+}
+
 </style>
 </head>
 
 <body>
 
+<div class="message" id="msg"></div>
+
 <div class="panel">
 
 <h1>Netes</h1>
 
+<div class="tabs">
+<button onclick="showLogin()">Giriş</button>
+<button onclick="showRegister()">Kayıt</button>
+</div>
 
+<div id="loginBox">
 
-<div id="login">
+<h2>Giriş</h2>
 
-<input id="user" placeholder="Kullanıcı adı">
-<input id="pass" type="password" placeholder="Şifre">
+<input id="loginUser" placeholder="Kullanıcı adı">
+<input id="loginPass" type="password" placeholder="Şifre">
 
 <br>
 
-<button onclick="login()">Giriş</button>
-<button onclick="register()">Kayıt</button>
+<button onclick="login()">Giriş Yap</button>
 
 </div>
 
+<div id="registerBox" style="display:none">
 
+<h2>Kayıt</h2>
+
+<input id="regUser" placeholder="Kullanıcı adı">
+<input id="regPass" type="password" placeholder="Şifre">
+
+<br>
+
+<button onclick="register()">Kayıt Ol</button>
+
+</div>
 
 <div id="menu" style="display:none">
 
@@ -112,11 +146,11 @@ margin-bottom:10px;
 
 <button onclick="openIP()">IP Analiz</button>
 
-</div>
+<button onclick="logout()">Çıkış</button>
 
 </div>
 
-
+</div>
 
 <div id="bots" style="display:none">
 
@@ -156,8 +190,6 @@ margin-bottom:10px;
 
 </div>
 
-
-
 <div id="ipPage" style="display:none">
 
 <h2>IP Analiz</h2>
@@ -176,27 +208,48 @@ margin-bottom:10px;
 
 <script>
 
+function siteMsg(text){
+msg.innerText=text
+msg.classList.add("show")
+setTimeout(()=>{msg.classList.remove("show")},3000)
+}
 
+function showLogin(){
+loginBox.style.display="block"
+registerBox.style.display="none"
+}
+
+function showRegister(){
+loginBox.style.display="none"
+registerBox.style.display="block"
+}
 
 function register(){
 
-let u=user.value
-let p=pass.value
+let u=regUser.value
+let p=regPass.value
 
 let db=JSON.parse(localStorage.getItem("users"))||[]
+
+if(db.find(x=>x.u==u)){
+siteMsg("Bu kullanıcı zaten var")
+return
+}
 
 db.push({u,p})
 
 localStorage.setItem("users",JSON.stringify(db))
 
-alert("Kayıt tamam")
+siteMsg("Kayıt başarılı")
+
+showLogin()
 
 }
 
 function login(){
 
-let u=user.value
-let p=pass.value
+let u=loginUser.value
+let p=loginPass.value
 
 let db=JSON.parse(localStorage.getItem("users"))||[]
 
@@ -204,61 +257,76 @@ let found=db.find(x=>x.u==u && x.p==p)
 
 if(found){
 
-login.style.display="none"
+localStorage.setItem("activeUser",u)
+
+loginBox.style.display="none"
+registerBox.style.display="none"
 menu.style.display="block"
 
 welcome.innerText="Merhaba "+u
 
+siteMsg("Giriş başarılı")
+
 }else{
 
-alert("Hatalı giriş")
+siteMsg("Hatalı giriş")
 
 }
 
 }
 
+function logout(){
 
+localStorage.removeItem("activeUser")
+
+location.reload()
+
+}
+
+window.onload=function(){
+
+let u=localStorage.getItem("activeUser")
+
+if(u){
+
+loginBox.style.display="none"
+registerBox.style.display="none"
+menu.style.display="block"
+
+welcome.innerText="Merhaba "+u
+
+}
+
+}
 
 function openBots(){
-
 menu.style.display="none"
 bots.style.display="block"
-
 }
 
 function openIP(){
-
 menu.style.display="none"
 ipPage.style.display="block"
-
 }
 
 function back(){
-
 bots.style.display="none"
 ipPage.style.display="none"
 menu.style.display="block"
-
 }
-
-
 
 async function checkServer(){
 
 let ip=serverIP.value
 
 let res=await fetch("https://api.mcsrvstat.us/2/"+ip)
-
 let data=await res.json()
 
 serverStatus.innerHTML=
-
 "Online: "+data.online+
 "<br>Oyuncular: "+(data.players?data.players.online:0)
 
 }
-
-
 
 function sendBots1(){
 
@@ -274,6 +342,8 @@ botResult1.innerText="Gönderilen bot "+i+"/"+count
 if(i>=count){
 
 clearInterval(interval)
+
+siteMsg("Bot gönderme tamamlandı")
 
 }
 
@@ -296,20 +366,19 @@ if(i>=count){
 
 clearInterval(interval)
 
+siteMsg("Bot gönderme tamamlandı")
+
 }
 
 },200)
 
 }
 
-
-
 async function ipLookup(){
 
 let ip=ipInput.value
 
 let res=await fetch("https://ipapi.co/"+ip+"/json/")
-
 let data=await res.json()
 
 ipInfo.innerHTML=
