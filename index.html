@@ -2,278 +2,238 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Alacahost</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlacaSunucum</title>
+
 <style>
+:root {
+  --bg-dark: #1e3c72;
+  --primary: #4a90e2;
+  --accent: #2a5298;
+}
 body {
   margin:0;
-  height:100vh;
-  background: linear-gradient(135deg, #003366, #cccccc);
-  font-family: 'Poppins', Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
+  font-family:'Segoe UI', sans-serif;
+  background: var(--bg-dark);
+  color:#fff;
 }
 
-.container {
-  text-align: center;
-  background: rgba(0,0,0,0.85);
-  padding: 50px 40px;
-  border-radius: 25px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  width: 380px;
-  position: relative;
+
+header{
+  text-align:center;
+  padding:60px 20px;
+  background: linear-gradient(90deg,var(--primary),var(--accent));
+  animation:fadeIn 1s ease;
 }
 
-h1 { font-size: 36px; font-weight: 700; margin-bottom: 20px; letter-spacing: 1px; }
 
-.link {
-  color: #00ccff;
-  text-decoration: underline;
-  cursor: pointer;
-  display: block;
-  margin: 15px 0;
-  font-weight: 600;
-  font-size: 16px;
-  transition: transform 0.2s ease;
+.menu{
+  position:fixed;
+  top:15px;
+  right:20px;
+  font-size:28px;
+  cursor:pointer;
+  transition: transform 0.3s;
+}
+.menu:hover{
+  transform:scale(1.2);
+}
+.dropdown{
+  position:fixed;
+  top:50px;
+  right:20px;
+  background:#111;
+  border-radius:10px;
+  display:none;
+  overflow:hidden;
+  animation:fadeIn 0.3s;
+}
+.dropdown div{
+  padding:10px 20px;
+  cursor:pointer;
+  transition: background 0.2s;
+}
+.dropdown div:hover{
+  background:#333;
 }
 
-.link:hover { transform: scale(1.05); }
 
-input {
-  display: block;
-  margin: 10px auto;
-  padding: 12px;
-  width: 90%;
-  border-radius: 10px;
-  border: 1px solid #aaa;
-  outline: none;
-  font-size: 14px;
+main{
+  max-width:1000px;
+  margin:40px auto;
+  padding:20px;
+}
+section{
+  margin-bottom:20px;
+  padding:20px;
+  background: rgba(255,255,255,0.05);
+  border-radius:12px;
+  transition: all 0.3s;
+  animation:fadeUp 0.8s ease;
+}
+section:hover{
+  transform:translateY(-5px) scale(1.02);
 }
 
-button {
-  padding: 10px 25px;
-  border: none;
-  border-radius: 15px;
-  background: #00aaff;
-  color: white;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 16px;
-  margin-top: 10px;
-  transition: background 0.3s ease, transform 0.2s ease;
+button{
+  background: linear-gradient(45deg,var(--primary),var(--accent));
+  color:#fff;
+  border:none;
+  padding:12px 30px;
+  border-radius:25px;
+  cursor:pointer;
+  transition: all 0.3s;
+}
+button:hover{
+  transform:scale(1.1);
 }
 
-button:hover { background: #0088cc; transform: scale(1.05); }
 
-#registerForm, #loginForm, #panel { display: none; }
-
-#panel {
-  width: 420px;
-  color: #333;
-  background: rgba(255,255,255,0.95);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  text-align: left;
-  position: relative;
+#authBox{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.85);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+.authPanel{
+  background:#111;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  width:300px;
+  animation:zoomIn 0.5s ease;
+}
+.authPanel input{
+  width:90%;
+  padding:10px;
+  margin:10px;
+  border-radius:10px;
+  border:none;
+}
+#switchText{
+  margin-top:10px;
+  text-decoration:underline;
+  cursor:pointer;
+  color:#4a90e2;
 }
 
-#panel h1 { text-align: center; }
 
-#progressContainer {
-  margin: 15px 0;
-  background: #ddd;
-  border-radius: 10px;
-  overflow: hidden;
-  height: 25px;
-  position: relative;
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
 }
-
-#progressBar {
-  width: 0%;
-  height: 100%;
-  background: #00aaff;
-  text-align: center;
-  line-height: 25px;
-  color: white;
-  font-weight: bold;
-  transition: width 0.2s linear;
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
 }
-
-.info {
-  margin-top: 20px;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #000;
-  display: none;
+@keyframes zoomIn{
+  from{transform:scale(0.7); opacity:0;}
+  to{transform:scale(1); opacity:1;}
 }
-
-.info a { color: #00aaff; text-decoration: none; }
-.info a:hover { text-decoration: underline; }
-
-
-.hamburger {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 30px;
-  height: 22px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.hamburger span {
-  display: block;
-  height: 4px;
-  width: 100%;
-  background: #333;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
-.hamburger.active span:nth-child(2) { opacity: 0; }
-.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
-
-#successMsg { color:green; text-align:center; font-weight:bold; display:none; margin-bottom:10px; }
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-<div class="container" id="auth">
-  <h1 id="loginTitle">GİRİŞ YAP</h1>
-  
-  <div id="loginForm">
-    <input type="text" id="logUser" placeholder="Kullanıcı adı">
-    <input type="password" id="logPass" placeholder="Şifre">
-    <button onclick="login()">Giriş Yap</button>
-  </div>
 
-  <div class="link" id="toggleRegister" onclick="showRegister()">KAYIT OL</div>
-
-  <div id="registerForm">
-    <input type="text" id="regUser" placeholder="Kullanıcı adı">
-    <input type="password" id="regPass" placeholder="Şifre">
-    <button onclick="register()">Kayıt Ol</button>
-    <div class="link" onclick="showLogin()">GİRİŞ YAP</div>
-  </div>
+<div class="menu" onclick="toggleMenu()">⋮</div>
+<div class="dropdown" id="menuBox">
+  <div onclick="goDiscord()">Discord</div>
+  <div onclick="goSite()">Web Site</div>
 </div>
 
-<div id="panel" class="container">
-  <div class="hamburger" onclick="toggleMenu(this)">
-    <span></span><span></span><span></span>
-  </div>
-  <h1>Bilgilendirme</h1>
-  <p id="successMsg">Başarıyla giriş yapıldı!</p>
-  <p>Hoş geldin, <span id="username"></span>!</p>
-  <p>Makina Gücü Yükleniyor:</p>
-  <div id="progressContainer">
-    <div id="progressBar">0%</div>
-  </div>
-  <button id="startBtn" onclick="startServer()" disabled>Başla</button>
+<header>
+<h1>AlacaSunucum 🗄️</h1>
+<p>DDOS korumalı, güvenli ve hızlı</p>
+</header>
 
-  <div class="info" id="menuInfo">
-    <h2>Alaca Sunucum 🗄️</h2>
-    <p><strong>Minecraft sunucuları için tamamen ücretsiz yeni nesil hosting! 🚀</strong></p>
-    <p>💯 <strong>%100 Ücretsiz Minecraft Sunucusu</strong> - Hiçbir ücret yok, direkt başla!</p>
-    <p>🎁 <strong>Davet Et, Kredi Kazan</strong> - Her davet = 1 kredi</p>
-    <p>🖥️ <strong>Krediyle Sunucu Aç</strong> - Davet yap, kredi topla, sunucunu kur!</p>
-    <p>
-    <p>
-    <p>
-    <p>
+<main>
+
+<section>
+<h2>⚡ Hızlı ve Güvenlik</h2>
+<p>Sunucularımız en yüksek performanslıdır.</p>
+</section>
+
+<section>
+<h2>🛡️ DDOS Koruması</h2>
+<p>Güçlü altyapı ile saldırılara karşı koruma.</p>
+</section>
+
+<section>
+<h2>💾 Kolay Yönetim</h2>
+<p>Panel üzerinden hızlı kontrol ve yönetim.</p>
+</section>
+
+<section style="text-align:center;">
+<button onclick="goDiscord()">Hemen Başla</button>
+</section>
+
+</main>
+
+
+<div id="authBox">
+  <div class="authPanel">
+    <h2 id="authTitle">Giriş Yap</h2>
+
+    <input id="user" placeholder="Kullanıcı adı">
+    <input id="pass" type="password" placeholder="Şifre">
+
+    <button onclick="auth()">Giriş Yap</button>
+
+    <div id="switchText" onclick="switchMode()">Kayıt Ol</div>
   </div>
 </div>
 
 <script>
-function showRegister(){
-  document.getElementById("registerForm").style.display="block";
-  document.getElementById("loginForm").style.display="none";
-  document.getElementById("toggleRegister").style.display="none";
-  document.getElementById("loginTitle").textContent="KAYIT OL";
-  document.getElementById("successMsg").style.display="none";
+let isLogin=true;
+
+function switchMode(){
+  isLogin=!isLogin;
+  document.getElementById("authTitle").innerText = isLogin ? "Giriş Yap" : "Kayıt Ol";
+  document.querySelector("#authBox button").innerText = isLogin ? "Giriş Yap" : "Kayıt Ol";
+  document.getElementById("switchText").innerText = isLogin ? "Kayıt Ol" : "Giriş Yap";
 }
 
-function showLogin(){
-  document.getElementById("registerForm").style.display="none";
-  document.getElementById("loginForm").style.display="block";
-  document.getElementById("toggleRegister").style.display="block";
-  document.getElementById("loginTitle").textContent="GİRİŞ YAP";
-  document.getElementById("successMsg").style.display="none";
+function auth(){
+  let u=document.getElementById("user").value;
+  let p=document.getElementById("pass").value;
+
+  if(!u||!p) return alert("Boş bırakma!");
+
+  if(isLogin){
+    if(localStorage.getItem(u)==p){
+      alert("Başarıyla giriş yapıldı!");
+      document.getElementById("authBox").style.display="none";
+    } else alert("Hatalı giriş!");
+  } else {
+    if(localStorage.getItem(u)) return alert("Bu kullanıcı var!");
+    localStorage.setItem(u,p);
+    alert("Kayıt olundu!");
+    switchMode();
+  }
 }
 
-function register(){
-  let user=document.getElementById("regUser").value;
-  let pass=document.getElementById("regPass").value;
-  if(!user||!pass){ alert("Boş bırakma!"); return; }
-  if(localStorage.getItem(user)){ alert("Bu kullanıcı zaten var!"); return; }
-  localStorage.setItem(user,pass);
-  showPanel(user);
-  document.getElementById("successMsg").textContent="Başarıyla kayıt olundu ve giriş yapıldı!";
-  document.getElementById("successMsg").style.display="block";
-  loadMachinePower();
+function toggleMenu(){
+  let m=document.getElementById("menuBox");
+  m.style.display = m.style.display=="block" ? "none" : "block";
 }
 
-function login(){
-  let user=document.getElementById("logUser").value;
-  let pass=document.getElementById("logPass").value;
-  let savedPass=localStorage.getItem(user);
-  if(savedPass===pass){
-    localStorage.setItem("loggedIn",user);
-    showPanel(user);
-    document.getElementById("successMsg").textContent="Başarıyla giriş yapıldı!";
-    document.getElementById("successMsg").style.display="block";
-    loadMachinePower();
-  } else { alert("Hatalı giriş!"); }
+function goDiscord(){
+  window.location.href="https://discord.gg/alacahost";
 }
-
-function showPanel(user){
-  document.getElementById("auth").style.display="none";
-  document.getElementById("panel").style.display="block";
-  document.getElementById("username").textContent=user;
-}
-
-function loadMachinePower(){
-  const progressBar=document.getElementById("progressBar");
-  const startBtn=document.getElementById("startBtn");
-  let width=0;
-  startBtn.disabled=true;
-  const interval=setInterval(()=>{
-    if(width>=100){
-      clearInterval(interval);
-      progressBar.style.width="100%";
-      progressBar.textContent="100%";
-      startBtn.disabled=false;
-    } else {
-      width+=Math.floor(Math.random()*5)+1;
-      if(width>100) width=100;
-      progressBar.style.width=width+"%";
-      progressBar.textContent=width+"%";
-    }
-  },300);
-}
-
-function startServer(){ window.location.href="https://discord.gg/alacahost"; }
-
-function toggleMenu(el){
-  el.classList.toggle("active");
-  const info=document.getElementById("menuInfo");
-  if(info.style.display==="block") info.style.display="none";
-  else info.style.display="block";
-}
-
-window.onload=function(){
-  let user=localStorage.getItem("loggedIn");
-  if(user){ 
-    showPanel(user); 
-    document.getElementById("successMsg").textContent="Başarıyla giriş yapıldı!";
-    document.getElementById("successMsg").style.display="block";
-    loadMachinePower(); 
-  } else showLogin();
+function goSite(){
+  window.location.href="https://dogansunucum.com/";
 }
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
