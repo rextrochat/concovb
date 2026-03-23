@@ -2,302 +2,111 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AlacaSunucum</title>
-
+<title>Modern Kontrol Paneli</title>
+<script src="https://cdn.tailwindcss.com"></script>
 <style>
-:root {
-  --bg: #0f2027;
-  --text:#fff;
-  --primary:#4facfe;
-  --accent:#00c6ff;
+input:focus {
+  @apply ring-4 ring-blue-400 shadow-lg transition-all duration-300;
 }
-
-.light{
-  --bg:#f5f5f5;
-  --text:#111;
+button {
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
-
-body{
-  margin:0;
-  font-family:'Segoe UI', sans-serif;
-  background: var(--bg);
-  color:var(--text);
-  transition:0.3s;
-}
-
-header{
-  text-align:center;
-  padding:60px 20px;
-}
-
-.bigTitle{
-  font-size:60px;
-  background: linear-gradient(45deg,var(--primary),var(--accent));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-.btn{
-  background: linear-gradient(45deg,var(--primary),var(--accent));
-  border:none;
-  padding:12px 25px;
-  border-radius:25px;
-  color:#fff;
-  cursor:pointer;
-  margin-top:15px;
-  transition:0.2s;
-}
-.btn:hover{ transform:scale(1.1); }
-.btn:active{ transform:scale(0.95); }
-
-#features, #pricing{
-  max-width:1100px;
-  margin:50px auto;
-  display:grid;
-  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-  padding:20px;
-}
-
-.card{
-  background: rgba(255,255,255,0.05);
-  padding:25px;
-  border-radius:15px;
-  transition:0.4s;
-  opacity:0;
-  transform:translateY(40px);
-}
-.card.show{
-  opacity:1;
-  transform:translateY(0);
-}
-.card:hover{
-  transform:translateY(-10px);
-}
-
-.price{
-  font-size:28px;
-  margin:10px 0;
-  color:var(--accent);
-}
-
-.menu{
-  position:fixed;
-  top:15px;
-  right:20px;
-  font-size:26px;
-  cursor:pointer;
-}
-
-.dropdown{
-  position:fixed;
-  top:50px;
-  right:20px;
-  background:#111;
-  display:none;
-  border-radius:10px;
-}
-.dropdown div{
-  padding:10px 20px;
-  cursor:pointer;
-}
-.dropdown div:hover{ background:#333; }
-
-#chatIcon{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:65px;
-  height:65px;
-  border-radius:50%;
-  background: var(--primary);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  cursor:pointer;
-}
-
-#chatBox{
-  position:fixed;
-  bottom:100px;
-  right:20px;
-  width:280px;
-  background:#111;
-  border-radius:15px;
-  display:none;
-  flex-direction:column;
-  padding:15px;
-}
-
-.botMsg{
-  background:#222;
-  padding:10px;
-  border-radius:10px;
-}
-
-.optionBtn{
-  margin-top:10px;
-  padding:10px;
-  border:none;
-  border-radius:10px;
-  background:var(--accent);
-  color:#fff;
-  cursor:pointer;
-}
-
-.toggleTheme{
-  position:fixed;
-  left:20px;
-  top:20px;
-  cursor:pointer;
-  font-size:20px;
+button:hover {
+  transform: scale(1.05);
+  background-color: #3b82f6; 
 }
 </style>
 </head>
+<body class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-400 to-white">
 
-<body>
-
-<div class="toggleTheme" onclick="toggleTheme()">🌙</div>
-
-<div class="menu" onclick="toggleMenu()">☰</div>
-<div class="dropdown" id="menuBox">
-  <div onclick="goDiscord()">Discord</div>
-  <div onclick="goSite()">Web Site</div>
+<div class="bg-black/20 rounded-xl p-8 w-96 text-white text-center">
+  <h1 class="text-2xl mb-6 font-semibold">Kontrol Paneli</h1>
+  <div class="flex flex-col space-y-3 mb-4">
+    <button onclick="showLag()" class="bg-blue-600 rounded-md py-2">IP Lag Kontrol Et</button>
+    <button onclick="showServer()" class="bg-blue-600 rounded-md py-2">Sunucu Kontrol Et</button>
+    <button onclick="showPasswordCheck()" class="bg-blue-600 rounded-md py-2">Şifre Güç Kontrolü</button>
+  </div>
+  <div id="inputSection" class="flex flex-col items-center"></div>
+  <div id="panelResult" class="mt-4 font-bold text-lg"></div>
 </div>
 
-<header>
-  <h1>AlacaSunucum 🗄️</h1>
-  <p>Profesyonel Hosting Hizmeti</p>
-</header>
 
-<main style="text-align:center;">
-  <h1 class="bigTitle">Güçlü Sunucular</h1>
-  <p>Hız, güvenlik ve performans bir arada.</p>
-  <button class="btn" onclick="scrollToSection('pricing')">Paketleri Gör</button>
-</main>
-
-
-<section id="features">
-  <div class="card">
-    <h2>⚡ Ultra Hız</h2>
-    <p>NVMe SSD ile yüksek performans</p>
-  </div>
-  <div class="card">
-    <h2>🛡️ DDOS Koruma</h2>
-    <p>Gelişmiş saldırı önleme</p>
-  </div>
-  <div class="card">
-    <h2>💻 Kolay Panel</h2>
-    <p>Tek tık yönetim sistemi</p>
-  </div>
-</section>
-
-
-<section id="pricing">
-
-  <div class="card">
-    <h2>Nginx</h2>
-    <div class="price"></div>
-    <p>1 GB RAM • 4 GB Disk • %50 CPU</p>
-    <p>🎟️ 1 Davet</p>
-    <button class="btn" onclick="goBuy('nginx')">Satın Al</button>
-  </div>
-
-  <div class="card">
-    <h2>Nano</h2>
-    <div class="price"></div>
-    <p>4 GB RAM • 10 GB Disk • %200 CPU</p>
-    <p>🎟️ 2 Davet</p>
-    <button class="btn" onclick="goBuy('nano')">Satın Al</button>
-  </div>
-
-  <div class="card">
-    <h2>Nano+</h2>
-    <div class="price"></div>
-    <p>6 GB RAM • 15 GB Disk • %200 CPU</p>
-    <p>🎟️ 4 Davet</p>
-    <button class="btn" onclick="goBuy('nanoplus')">Satın Al</button>
-  </div>
-
-  <div class="card" style="border:2px solid gold;">
-    <h2>⭐ Pro (En Popüler)</h2>
-    <div class="price"></div>
-    <p>8 GB RAM • 20 GB Disk • %200 CPU</p>
-    <p>🎟️ 6 Davet</p>
-    <button class="btn" onclick="goBuy('pro')">Satın Al</button>
-  </div>
-
-  <div class="card">
-    <h2>Pro+</h2>
-    <div class="price"></div>
-    <p>12 GB RAM • 25 GB Disk • %200 CPU</p>
-    <p>🎟️ 10 Davet</p>
-    <button class="btn" onclick="goBuy('proplus')">Satın Al</button>
-  </div>
-
-  <div class="card">
-    <h2>Ultimate</h2>
-    <div class="price"></div>
-    <p>14 GB RAM • 30 GB Disk • %200 CPU</p>
-    <p>🎟️ 13 Davet</p>
-    <button class="btn" onclick="goBuy('ultimate')">Satın Al</button>
-  </div>
-
-</section>
-
-
-<div id="chatIcon" onclick="toggleChat()">💬</div>
-
-<div id="chatBox">
-  <p class="botMsg">Merhaba 👋 Yardım ister misin?</p>
-  <button class="optionBtn" onclick="goDiscord()">Destek Al</button>
+<div class="mt-6 text-center text-white font-bold tracking-widest">
+  REXTRO TARAFINDAN YAPILIP GELİŞTİRİLMİŞTİR
 </div>
 
 <script>
-function toggleMenu(){
-  let m=document.getElementById("menuBox");
-  m.style.display = m.style.display=="block" ? "none" : "block";
+function clearPanel(){
+  document.getElementById('inputSection').innerHTML='';
+  document.getElementById('panelResult').innerHTML='';
 }
 
-function goDiscord(){
-  window.open("https://discord.gg/alacahost","_blank");
+function showLag(){
+  clearPanel();
+  document.getElementById('inputSection').innerHTML=`
+    <input type="text" id="url" placeholder="URL veya IP girin" class="mb-2 p-2 rounded-md bg-blue-500 text-white w-full">
+    <button onclick="testLag()" class="bg-blue-600 rounded-md py-2 w-full">Test Et</button>`;
 }
 
-function goSite(){
-  window.location.href="https://dogansunucum.com/";
+function showServer(){
+  clearPanel();
+  document.getElementById('inputSection').innerHTML=`
+    <input type="text" id="url" placeholder="Sunucu URL girin" class="mb-2 p-2 rounded-md bg-blue-500 text-white w-full">
+    <button onclick="testServer()" class="bg-blue-600 rounded-md py-2 w-full">Test Et</button>`;
 }
 
-function scrollToSection(id){
-  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+function showPasswordCheck(){
+  clearPanel();
+  document.getElementById('inputSection').innerHTML=`
+    <input type="password" id="pwCheck" placeholder="Şifre girin" class="mb-2 p-2 rounded-md bg-blue-500 text-white w-full">
+    <button onclick="checkPassword()" class="bg-blue-600 rounded-md py-2 w-full">Kontrol Et</button>`;
 }
 
-function goBuy(paket){
-  window.open("https://dogansunucum.com/?paket=" + paket, "_blank");
+async function testLag(){
+  const url=document.getElementById('url').value;
+  const resultDiv=document.getElementById('panelResult');
+  if(!url){resultDiv.innerText='Lütfen URL girin!'; return;}
+  const start=performance.now();
+  try{
+    await fetch(url,{method:'HEAD',mode:'no-cors'});
+    const end=performance.now();
+    const latency=Math.round(end-start);
+    let color='green', status='Hızlı ';
+    if(latency>500){color='red'; status='Yavaş ';}
+    else if(latency>200){color='yellow'; status='Orta ';}
+    resultDiv.innerHTML=`Gecikme: <span style="color:${color}">${latency} ms</span> — ${status}`;
+  } catch(err){
+    resultDiv.innerHTML='<span style="color:red">Sunucuya ulaşılamıyor!</span>';
+  }
 }
 
-
-function toggleTheme(){
-  document.body.classList.toggle("light");
+async function testServer(){
+  const url=document.getElementById('url').value;
+  const resultDiv=document.getElementById('panelResult');
+  if(!url){resultDiv.innerText='Lütfen URL girin!'; return;}
+  const start=performance.now();
+  try{
+    await fetch(url,{method:'GET',mode:'no-cors'});
+    const end=performance.now();
+    const latency=Math.round(end-start);
+    let color='green', status='Hızlı ';
+    if(latency>500){color='red'; status='Yavaş ';}
+    else if(latency>200){color='yellow'; status='Orta ';}
+    resultDiv.innerHTML=`Sunucu Yanıt Süresi: <span style="color:${color}">${latency} ms</span> — ${status}`;
+  } catch(err){
+    resultDiv.innerHTML='<span style="color:red">Sunucuya ulaşılamıyor!</span>';
+  }
 }
 
-
-function toggleChat(){
-  let c=document.getElementById("chatBox");
-  c.style.display = c.style.display=="flex" ? "none" : "flex";
+function checkPassword(){
+  const pw=document.getElementById('pwCheck').value;
+  const resultDiv=document.getElementById('panelResult');
+  if(!pw){resultDiv.innerText='Şifre girin!'; return;}
+  let strength='Zayıf ';
+  if(pw.length>=8 && /[A-Z]/.test(pw) && /[0-9]/.test(pw) && /[\W]/.test(pw)) strength='Güçlü ';
+  else if(pw.length>=6 && /[0-9]/.test(pw)) strength='Orta ';
+  resultDiv.innerText=`Şifre Güç: ${strength}`;
 }
-
-
-const cards=document.querySelectorAll(".card");
-
-window.addEventListener("scroll",()=>{
-  cards.forEach(card=>{
-    let top=card.getBoundingClientRect().top;
-    if(top<window.innerHeight-50){
-      card.classList.add("show");
-    }
-  });
-});
 </script>
 
 </body>
